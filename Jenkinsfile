@@ -6,7 +6,7 @@ pipeline {
             steps {
                 echo 'Installation de Python...'
                 // Adaptez cette commande en fonction de l'environnement de votre agent Jenkins
-                sh 'sudo apt-get update && sudo apt-get install -y python3 python3-venv'
+                sh 'apt-get update && apt-get install -y python3 python3-venv'
             }
         }
 
@@ -25,6 +25,21 @@ pipeline {
             }
         }
 
-        // Reste du Jenkinsfile...
+stage('Test') {
+            steps {
+                echo 'Exécution des tests...'
+                // Ici, vous pouvez exécuter des tests réels si disponibles.
+                // Pour cet exemple, nous allons simplement vérifier que Python fonctionne.
+                sh 'python --version'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Déploiement de l\'application...'
+                // Ici, vous pouvez ajouter des étapes de déploiement.
+                // Pour cet exemple, nous allons simplement lancer l'application.
+                sh 'python app.py &'
+            }
+        }
     }
 }
