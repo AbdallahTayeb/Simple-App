@@ -1,0 +1,17 @@
+name: Flask CI Pipeline
+
+on: [push]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build the Docker image
+      run: docker build . -t my-flask-app
+
+    - name: Run Tests
+      run: |
+        docker run my-flask-app python -m unittest
